@@ -12,7 +12,7 @@ SQUARE_SIZE = WIDTH // BOARD_SIZE
 
 # Colors
 WHITE = (255, 255, 255)
-BOARD_COLOR_W = (222, 184, 135)  # Wood color
+BOARD_COLOR_W = (222, 184, 135)
 BOARD_COLOR_B = (30, 30, 30)
 GREEN = (0, 255, 0)
 
@@ -48,10 +48,11 @@ board = [
 selected_piece = None
 available_moves = []
 
+
 # Function to get available moves based on the piece type
 def get_available_moves(piece, row, col):
     moves = []
-    
+
     if 'pawn' in piece:
         # Pawn move rules
         direction = 1 if 'w' in piece else -1
@@ -70,7 +71,7 @@ def get_available_moves(piece, row, col):
             moves.append((row + direction, col - 1))
         if 0 <= col + 1 < BOARD_SIZE and board[row + direction][col + 1] != '' and 'w' in piece:
             moves.append((row + direction, col + 1))
-            
+
     elif 'rook' in piece:
         # Rook move rules
         for i in range(row + 1, BOARD_SIZE):
@@ -101,7 +102,7 @@ def get_available_moves(piece, row, col):
                 if board[row][j][0] != piece[0]:
                     moves.append((row, j))
                 break
-    
+
     elif 'knight' in piece:
         # Knight move rules
         possible_moves = [
@@ -114,7 +115,7 @@ def get_available_moves(piece, row, col):
             r, c = move
             if 0 <= r < BOARD_SIZE and 0 <= c < BOARD_SIZE and (board[r][c] == '' or board[r][c][0] != piece[0]):
                 moves.append(move)
-    
+
     elif 'bishop' in piece:
         # Bishop move rules
         for i, j in zip(range(row + 1, BOARD_SIZE), range(col + 1, BOARD_SIZE)):
@@ -145,13 +146,13 @@ def get_available_moves(piece, row, col):
                 if board[i][j][0] != piece[0]:
                     moves.append((i, j))
                 break
-    
+
     elif 'queen' in piece:
         # Queen move rules
         # Combine rook and bishop moves
         moves += get_available_moves(f"{piece[0]}_rook", row, col)
         moves += get_available_moves(f"{piece[0]}_bishop", row, col)
-    
+
     elif 'king' in piece:
         # King move rules
         possible_moves = [
@@ -164,8 +165,9 @@ def get_available_moves(piece, row, col):
             r, c = move
             if 0 <= r < BOARD_SIZE and 0 <= c < BOARD_SIZE and (board[r][c] == '' or board[r][c][0] != piece[0]):
                 moves.append(move)
-    
+
     return moves
+
 
 # Main game loop
 while True:
@@ -222,5 +224,5 @@ while True:
     # Update the display
     pygame.display.flip()
 
-#v 0.5
+# v 0.8
 # made by Yes and levs16
